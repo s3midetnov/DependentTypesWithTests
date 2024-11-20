@@ -1,17 +1,18 @@
-\import Data.Bool
+\import Tests.Definitions
+\import lect01 (Bool, false, true)
+\import lect02 (List, T)
 \import lect04
 
 -- 1. Напишите функцию lookup, которая принимает List A и натуральное число и возвращает элемент по заданому индексу.
 --    В общем случае эту функцию определить невозможно, т.к. индекс может быть больше, чем число элементов в списке.
 --    Поэтому эта функция должна дополнительно еще принимать доказательство того, что индекс находится в допустимых границах, в виде T (n < length xs).
-
 \func \infix 4 < (x y : Nat) : Bool
   | 0, 0 => false
   | 0, suc y => true
   | suc x, 0 => false
   | suc x, suc y => x < y
 
-\func lookup => {?}
+\func lookup_list {A : \Type} (l : List A)(n : Nat)(p : T(n < length l)) => {?}
 
 -- 2. Реализуйте аналоги функции replicate для vec и Vec (эта функция создает список заданной длины, состоящий из повторений данного элемента).
 

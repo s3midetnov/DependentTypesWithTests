@@ -1,0 +1,92 @@
+\import Arith.Nat
+\import Set
+\import lect01 (Bool, false, true)
+\import lect02
+
+\func not (x : Bool) : Bool
+  | true => false
+  | false => true
+
+\func \infix 7 or (x y : Bool) : Bool
+  | false, false => false
+  | false, true => true
+  | true, false => true
+  | true, true => true
+
+\func \infix 8 and (x y : Bool) : Bool
+  | false, false => false
+  | false, true => false
+  | true, false => false
+  | true, true => true
+
+\func length {A : \Type}(l : List A) : Nat \elim l
+  | nil => 0
+  | cons a l => suc (length l)
+
+{- | lists -}
+-- [1, 2, 3, 100]
+\func test-list-1 : List Nat => cons 1 (cons 2 (cons 3 (cons 100 nil)))
+\func test-list-1-tail : List Nat => cons 2 (cons 3 (cons 100 nil))
+\func test-list-1-sort-1 : List Nat => cons 1 (cons 2 (cons 3 (cons 100 nil)))
+\func test-list-1-sort-2 : List Nat => cons 100 (cons 3 (cons 2 (cons 1 nil)))
+-- [*, *, *, *, *, *]
+\func test-list-2 : List Unit => cons unit (cons unit (cons unit (cons unit (cons unit (cons unit nil)))))
+\func test-list-2-tail : List Unit => cons unit (cons unit (cons unit (cons unit (cons unit nil))))
+-- [10, 2, 3, 100]
+\func test-list-3 : List Nat => cons 10 (cons 2 (cons 3 (cons 100 nil)))
+\func test-list-3-tail : List Nat => cons 2 (cons 3 (cons 100 nil))
+\func test-list-3-sort-1 : List Nat => cons 10 (cons 2 (cons 3 (cons 100 nil)))
+-- [0, 0, 0, 100]
+\func test-list-4 : List Nat => cons 0 (cons 0 (cons 0 (cons 100 nil)))
+\func test-list-4-tail : List Nat => cons 0 (cons 0 (cons 100 nil))
+-- [1, 1, 1, 0]
+\func test-list-5 : List Nat => cons 1 (cons 1 (cons 1 (cons 0 nil)))
+\func test-list-5-tail : List Nat => cons 1 (cons 1 (cons 0 nil))
+-- []
+\func test-list-6 : List Nat => nil
+\func test-list-6-tail : List Nat => nil
+-- [10]
+\func test-list-7 : List Nat => cons 10 nil
+\func test-list-7-tail : List Nat => nil
+-- [10000000, 1]
+\func test-list-8 : List Nat => cons 10000000 (cons 1 nil)
+\func test-list-8-tail : List Nat => cons 1 nil
+-- [true, false, true, false]
+\func test-list-9 : List Bool => cons true (cons false (cons true (cons false nil)))
+\func test-list-9-tail : List Bool => cons false (cons true (cons false nil))
+
+
+{- | Orders -}
+-- usual order
+\func test-NatOrder1 (x y : Nat) : Bool \elim x, y
+  | 0, 0 => true
+  | 0, suc y => true
+  | suc x, 0 => false
+  | suc x, suc y => test-NatOrder1 x y
+
+-- inverse order : x <= y if y <= x in the usual sense
+\func test-NatOrder2 (x y : Nat) : Bool => not (test-NatOrder1 x y)
+
+-- divisibility order : x <= y, if y = kx. Note : you don't need to understand how it is defined
+\func test-NatOrder3 (x y : Nat) : Bool => \case decideEq {NatSemiring} (Nat.mod y x) 0 \with {
+  | yes e => true
+  | no n => false}
+\where \protected{
+  {- | Some tests to illustrate -}
+  -- 9 is divisible by 3, hence 3 <= 9
+  \func test1 : test-NatOrder3 3 9 = true => idp
+
+  -- 9 is not divisible by 4, hence not(4 <= 9)
+  \func test2 : test-NatOrder3 4 9 = false => idp
+
+  -- 18 is divisible by 9
+  \func test3 : test-NatOrder3 9 18 = true => idp
+}
+
+-- order on Bool, if false = 0, true = 1. Notice that x <= y = x -> y
+\func test-BoolOrder1 (_ _  : Bool) : Bool
+  | false, false => true
+  | false, true => true
+  | true, false => false
+  | true, true => true
+

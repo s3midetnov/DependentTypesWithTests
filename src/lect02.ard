@@ -1,5 +1,5 @@
 \import Algebra.Meta
-\import Data.Bool
+\import lect01
 \import Data.Or
 \import Meta
 
@@ -278,7 +278,7 @@
 
 \func idpExample' (x : Nat) : x + 1 = suc x => idp
 
-\func idpExample'' (x : Nat) : 1 + x = suc x => idp
+-- \func idpExample'' (x : Nat) : 1 + x = suc x => idp
 
 -- Доказать, что not является инволюцией можно также как и раньше.
 \func not-isInvolution_ (x : Bool) : not (not x) = x

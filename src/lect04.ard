@@ -20,7 +20,7 @@
 \func tail {A : \Type} (n : Nat) (xs : vec A (suc n))
   => xs.2
 
--- 2. Индуктивное определиние Vec, head, tail, append, length.
+-- 2. Индуктивное определение Vec, head, tail, append, length.
 
 \data Vec (A : \Type) (n : Nat) \elim n
   | 0 => nil

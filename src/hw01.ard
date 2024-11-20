@@ -18,6 +18,15 @@
    second' = flip (second 0)
 -}
 
+\func second : Nat -> Nat -> Nat -> Nat => {?}
+
+\func apply : (Nat -> Nat) -> Nat -> Nat => {?}
+
+\func compose : (Nat -> Nat) -> (Nat -> Nat) -> Nat -> Nat => {?}
+
+\func flip : (Nat -> Nat -> Nat) -> Nat -> Nat -> Nat => {?}
+
+
 -- 3. Расставьте приоритеты функций f1, f2, f3, f4, f5 и f6 так, чтобы функция test проходила тайпчекинг.
 
 \import lect01 \hiding (+,*)
@@ -55,3 +64,5 @@
 \func mod (x y : Nat) => {?}
 
 \func gcd (x y : Nat) => {?}
+
+-- Критерий выполнения: функция test тайпчекается, тесты в Tests1.ard тоже тайпчекаются

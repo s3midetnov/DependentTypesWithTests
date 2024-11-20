@@ -1,0 +1,22 @@
+\import Tests.Definitions
+\import lect01 (Bool, true, false)
+\import hw04
+\import lect02
+-- 1. Напишите функцию lookup, которая принимает List A и натуральное число
+-- и возвращает элемент по заданому индексу.
+--    В общем случае эту функцию определить невозможно,
+--    т.к. индекс может быть больше, чем число элементов в списке.
+--    Поэтому эта функция должна дополнительно еще
+--    принимать доказательство того, что индекс находится
+--    в допустимых границах, в виде T (n < length xs).
+
+{- | Tests for problem 1 -}
+
+\func test-1-1 : lookup_list test-list-1 3 _ = 100 => idp
+\func test-1-2 : lookup_list test-list-2 1 _ = unit => idp
+\func test-1-3 : lookup_list test-list-3 0 _ = 10 => idp
+\func test-1-4 : lookup_list test-list-4 2 _ = 0 => idp
+\func test-1-5 : lookup_list test-list-5 2 _ = 1 => idp
+\func test-1-7 : lookup_list test-list-7 0 _ = 10 => idp
+\func test-1-8 : lookup_list test-list-8 1 _ = 1 => idp
+\func test-1-9 : lookup_list test-list-5 1 _ = true => idp
