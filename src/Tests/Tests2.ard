@@ -16,5 +16,20 @@
 
 {- | Tests for problem 2 -}
 
-\func test-2-1 : sort test-NatOrder1 test-list-1 = test-list-1-sort-1 => {?}
+\func test-2-list1-order1 : sort test-NatOrder1 test-list-1 = test-list-1-sort-1 => idp
+\func test-2-list1-order2 : sort test-NatOrder2 test-list-1 = test-list-1-sort-2 => idp
+\func test-2-list3-order1 : sort test-NatOrder1 test-list-3 = test-list-3-sort-1 => idp
+\func test-2-list3-order2 : sort test-NatOrder2 test-list-3 = test-list-3-sort-2 => idp
+\func test-2-list4-order1 : sort test-NatOrder1 test-list-4 = test-list-4-sort-1 => idp
+\func test-2-list4-order2 : sort test-NatOrder2 test-list-4 = test-list-4-sort-2 => idp
+\func test-2-list5-order1 : sort test-NatOrder1 test-list-5 = test-list-4-sort-1 => idp
+\func test-2-list5-order2 : sort test-NatOrder2 test-list-5 = test-list-5-sort-2 => idp
+\func test-2-list6-order1 : sort test-NatOrder1 test-list-6 = test-list-6-sort-1 => idp
+\func test-2-list6-order2 : sort test-NatOrder2 test-list-6 = test-list-6-sort-2 => idp
+\func test-2-list6-order3 : sort test-NatOrder3 test-list-6 = test-list-6-sort-3 => idp
+\func test-2-list9-order : sort test-BoolOrder1 test-list-9 = test-list-9-sort => idp
+
+
+
+
 

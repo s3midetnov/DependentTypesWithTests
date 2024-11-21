@@ -35,16 +35,24 @@
 -- [10, 2, 3, 100]
 \func test-list-3 : List Nat => cons 10 (cons 2 (cons 3 (cons 100 nil)))
 \func test-list-3-tail : List Nat => cons 2 (cons 3 (cons 100 nil))
-\func test-list-3-sort-1 : List Nat => cons 10 (cons 2 (cons 3 (cons 100 nil)))
+\func test-list-3-sort-1 : List Nat => cons 2 (cons 3 (cons 10 (cons 100 nil)))
+\func test-list-3-sort-2 : List Nat => cons 100 (cons 10 (cons 3 (cons 2 nil)))
 -- [0, 0, 0, 100]
 \func test-list-4 : List Nat => cons 0 (cons 0 (cons 0 (cons 100 nil)))
 \func test-list-4-tail : List Nat => cons 0 (cons 0 (cons 100 nil))
+\func test-list-4-sort-1 : List Nat => cons 0 (cons 0 (cons 0 (cons 100 nil)))
+\func test-list-4-sort-2 : List Nat => cons 100 (cons 0 (cons 0 (cons 0 nil)))
 -- [1, 1, 1, 0]
 \func test-list-5 : List Nat => cons 1 (cons 1 (cons 1 (cons 0 nil)))
 \func test-list-5-tail : List Nat => cons 1 (cons 1 (cons 0 nil))
+\func test-list-5-sort-1 : List Nat => cons 0 (cons 1 (cons 1 (cons 1 nil)))
+\func test-list-5-sort-2 : List Nat => cons 1 (cons 1 (cons 1 (cons 0 nil)))
 -- []
 \func test-list-6 : List Nat => nil
 \func test-list-6-tail : List Nat => nil
+\func test-list-6-sort-1 : List Nat => nil
+\func test-list-6-sort-2 : List Nat => nil
+\func test-list-6-sort-3 : List Nat => nil
 -- [10]
 \func test-list-7 : List Nat => cons 10 nil
 \func test-list-7-tail : List Nat => nil
@@ -54,6 +62,7 @@
 -- [true, false, true, false]
 \func test-list-9 : List Bool => cons true (cons false (cons true (cons false nil)))
 \func test-list-9-tail : List Bool => cons false (cons true (cons false nil))
+\func test-list-9-sort : List Bool => cons false (cons false (cons true (cons true nil)))
 
 
 {- | Orders -}
@@ -67,7 +76,8 @@
 -- inverse order : x <= y if y <= x in the usual sense
 \func test-NatOrder2 (x y : Nat) : Bool => not (test-NatOrder1 x y)
 
--- divisibility order : x <= y, if y = kx. Note : you don't need to understand how it is defined
+-- divisibility order : x <= y, if y = kx.
+-- Note : you don't need to understand how it is defined
 \func test-NatOrder3 (x y : Nat) : Bool => \case decideEq {NatSemiring} (Nat.mod y x) 0 \with {
   | yes e => true
   | no n => false}
@@ -90,3 +100,30 @@
   | true, false => false
   | true, true => true
 
+\import lect04 \using (cons \as cons', nil \as nil') \hiding (Unit, foo, unit)
+
+\func replicated_vec_Nat_1 : vec Nat 5 => (0, (0, (0, (0, (0, ())))))
+\func map_true_vec_Nat_1 : vec Bool 5 => (true, (true, (true, (true, (true, ())))))
+\func map_+5_vec_Nat_2 : vec Nat 5 => (5, (5, (5, (5, (5, ())))))
+
+\func replicated_vec_Nat_2 : vec Nat 3 => (7, (7, (7, ())))
+\func replicated_vec_Nat_3 : vec Nat 1 => (0, ())
+
+\func replicated_vec_Bool_1 : vec Bool 0 => ()
+\func map_1_vec_Bool_1 : vec Nat 0 => ()
+
+\func replicated_Vec_Nat_1 : Vec Nat 5 => cons' 4 (cons' 4 (cons' 4 (cons' 4 (cons' 4 nil'))))
+\func replicated_Vec_Nat_2 : Vec Nat 3 => cons' 7 (cons' 7 (cons' 7 nil'))
+\func replicated_Vec_Bool_1 : Vec Bool 2 => cons' true (cons' true nil')
+
+\func test_vec_Nat_1 : vec Nat 4 => (1, (2, (3, (4, ()))))
+\func map_true_test_vec_1 : vec Bool 4 => (true, (true, (true, (true, ()))))
+\func map_+7_test_vec_1 : vec Nat 4 => (8, (9, (10, (11, ()))))
+\func map_*0_test_vec_1 : vec Nat 4 => (0, (0, (0, (0, ()))))
+\func map_*4_test_vec_1 : vec Nat 4 => (4, (8, (12, (16, ()))))
+
+\func test_Vec_Nat_1 : Vec Nat 4 => cons' 5 (cons' 6 (cons' 7 (cons' 8 nil')))
+\func map_true_test_Vec_Nat_1 : Vec Bool 4 => cons' true (cons' true (cons' true (cons' true nil')))
+\func map_+2_test_Vec_Nat_1 : Vec Nat 4 => cons' 7 (cons' 8 (cons' 9 (cons' 10 nil')))
+\func map_*2_test_Vec_Nat_1 : Vec Nat 4 => cons' 10 (cons' 12 (cons' 14 (cons' 16 nil')))
+\func map_*0_test_Vec_Nat_1 : Vec Nat 4 => cons' 0 (cons' 0 (cons' 0 (cons' 0 nil')))

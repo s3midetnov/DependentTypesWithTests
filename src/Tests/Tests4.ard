@@ -1,7 +1,9 @@
 \import Tests.Definitions
 \import lect01 (Bool, true, false)
 \import hw04
-\import lect02
+\import lect02 (unit)
+\import lect04 \hiding (J', unit)
+
 -- 1. Напишите функцию lookup, которая принимает List A и натуральное число
 -- и возвращает элемент по заданому индексу.
 --    В общем случае эту функцию определить невозможно,
@@ -20,3 +22,35 @@
 \func test-1-7 : lookup_list test-list-7 0 _ = 10 => idp
 \func test-1-8 : lookup_list test-list-8 1 _ = 1 => idp
 \func test-1-9 : lookup_list test-list-5 1 _ = true => idp
+
+
+{- | Tests for problem 2 -}
+\func test-2-vec-1 : replicate_vec 0 5 = replicated_vec_Nat_1 => idp
+\func test-2-vec-2 : replicate_vec 7 3 = replicated_vec_Nat_2 => idp
+\func test-2-vec-3 : replicate_vec 0 1 = replicated_vec_Nat_3 => idp
+\func test-2-vec-4 : replicate_vec true 0 = replicated_vec_Bool_1 => idp
+\func test-2-Vec-1 : replicate_Vec 4 5 = replicated_Vec_Nat_1 => idp
+\func test-2-Vec-2 : replicate_Vec 7 3 = replicated_Vec_Nat_2 => idp
+\func test-2-Vec-3 : replicate_Vec true 2 = replicated_Vec_Bool_1 => idp
+
+
+{- | Tests for problem 3 -}
+\func test-3-vec-1 : map_vec {Nat}{Bool} (\lam _ => true) {5} replicated_vec_Nat_1 = map_true_vec_Nat_1 => idp
+\func test-3-vec-2 : map_vec {Nat}{Nat} (5 Nat.+ ) {5} replicated_vec_Nat_1 = map_+5_vec_Nat_2 => idp
+\func test-3-vec-3 : map_vec {Bool}{Nat} (\lam _ => 1) {0} replicated_vec_Bool_1 = map_1_vec_Bool_1 => idp
+\func test-3-vec-5 : map_vec {Nat}{Bool} (\lam _ => true) {4} test_vec_Nat_1 = map_true_test_vec_1 => idp
+\func test-3-vec-6 : map_vec {Nat}{Nat} (7 Nat.+) {4} test_vec_Nat_1 = map_+7_test_vec_1 => idp
+\func test-3-vec-7 : map_vec {Nat}{Nat} (0 Nat.*) {4} test_vec_Nat_1 = map_*0_test_vec_1 => idp
+\func test-3-vec-8 : map_vec {Nat}{Nat} (4 Nat.*) {4} test_vec_Nat_1 = map_*4_test_vec_1 => idp
+
+--
+\func test-3-Vec-1 : map_Vec {Nat}{Bool}(\lam _ => true) test_Vec_Nat_1 = map_true_test_Vec_Nat_1 => idp
+\func test-3-Vec-2 : map_Vec {Nat}{Nat}(2 Nat.+) test_Vec_Nat_1 = map_+2_test_Vec_Nat_1 => idp
+\func test-3-Vec-3 : map_Vec {Nat}{Nat}(2 Nat.*) test_Vec_Nat_1 = map_*2_test_Vec_Nat_1 => idp
+\func test-3-Vec-4 : map_Vec {Nat}{Nat}(0 Nat.*) test_Vec_Nat_1 = map_*0_test_Vec_Nat_1 => idp
+
+
+{- | Tests for problem 5 -}
+\func test-4-vec-1 : zipWith_vec {Nat} {Nat} {Nat} (\lam x y => x Nat.+ 2 Nat.* y) {5} replicated_vec_Nat_1 map_+5_vec_Nat_2 = (10, (10, (10, (10, (10, ()))))) => idp
+\func test-4-vec-2 : zipWith_vec {Nat} {Nat} {Nat} (\lam x y => x Nat.+  y) {5} (replicate_vec 1 5) (replicate_vec 7 5) = (replicate_vec 8 5) => idp
+\func test-4-Vec-3 : zipWith_Vec {Nat} {Nat} {Nat} (\lam x y => x Nat.+  y) {4} test_Vec_Nat_1 test_Vec_Nat_1 = map_*2_test_Vec_Nat_1 => idp

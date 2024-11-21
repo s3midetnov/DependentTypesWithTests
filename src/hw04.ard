@@ -16,10 +16,24 @@
 
 -- 2. Реализуйте аналоги функции replicate для vec и Vec (эта функция создает список заданной длины, состоящий из повторений данного элемента).
 
+\func replicate_vec {A : \Type}(a : A)(n : Nat) : vec A n => {?}
+
+\func replicate_Vec {A : \Type}(a : A)(n : Nat) : Vec A n => {?}
+
 -- 3. Реализуйте аналоги функции map для vec и Vec.
+
+-- http://www.zvon.org/other/haskell/Outputprelude/map_f.html
+\func map_vec {A B : \Type}(f : A -> B) {n : Nat}(v : vec A n) : vec B n => {?}
+
+\func map_Vec {A B : \Type}(f : A -> B) {n : Nat}(v : Vec A n) : Vec B n => {?}
 
 -- 4. Реализуйте аналоги функции zipWith для vec и Vec.
 --    Функция должна принимать вектора одинаковой длины.
+
+-- http://www.zvon.org/other/haskell/Outputprelude/zipWith_f.html, https://hackage.haskell.org/package/base-4.20.0.1/docs/Prelude.html#v:zipWith
+\func zipWith_vec {A B C : \Type} (f : A -> B -> C) {n : Nat}(v : vec A n)(u : vec B n) : vec C n => {?}
+
+\func zipWith_Vec {A B C : \Type} (f : A -> B -> C) {n : Nat}(v : Vec A n)(u : Vec B n) : Vec C n => {?}
 
 -- 5. Определите тип CTree A n полных бинарных деревьев высоты ровно n, которые хранят элементы только во внутренних узлах, но не в листьях.
 --    Высота листа равна 0.
