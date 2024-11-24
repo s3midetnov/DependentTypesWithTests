@@ -1,0 +1,8 @@
+\import hw05
+\import lect01
+
+\func test-1-1 : swap {Nat}{Bool} (10, true) = (true, 10) => idp
+
+\func test-1-2 : swap {Nat}{Nat} (10, 15) = (15, 10) => idp
+
+\func test-1-3 : swap {Bool}{Bool} (false, true) = (true, false) => idp
